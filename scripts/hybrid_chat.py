@@ -1,4 +1,5 @@
 import json
+import numpy as np
 from pinecone import Pinecone
 from neo4j import GraphDatabase
 from transformers import AutoTokenizer, AutoModel
@@ -14,7 +15,11 @@ def embed_text(text):
     inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
     with torch.no_grad():
         embeddings = embedding_model(**inputs).pooler_output
-    return embeddings[0].tolist()
+    vec = embeddings[0].cpu().numpy()
+    norm = np.linalg.norm(vec)
+    if norm == 0:
+        return vec.tolist()
+    return (vec / norm).tolist()
 
 pc = Pinecone(api_key=config.PINECONE_API_KEY)
 index = pc.Index(config.PINECONE_INDEX_NAME)
