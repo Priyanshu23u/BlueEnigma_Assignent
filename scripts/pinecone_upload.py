@@ -5,6 +5,9 @@ from pinecone import Pinecone, ServerlessSpec
 from transformers import AutoTokenizer, AutoModel
 import torch
 import config
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 # Load embedding model (example: Jina embeddings, or any suitable model)
 tokenizer = AutoTokenizer.from_pretrained("jinaai/jina-embeddings-v2-base-en")
@@ -16,7 +19,7 @@ def get_embedding(text):
         embeddings = embedding_model(**inputs).pooler_output
     return embeddings[0].tolist()
 
-DATA_FILE = "vietnam_travel_dataset.json"
+DATA_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'vietnam_travel_dataset.json'))
 BATCH_SIZE = 32
 
 pc = Pinecone(api_key=config.PINECONE_API_KEY)

@@ -2,8 +2,11 @@ import json
 from neo4j import GraphDatabase
 from tqdm import tqdm
 import config
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-DATA_FILE = "vietnam_travel_dataset.json"
+DATA_FILE = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'data', 'vietnam_travel_dataset.json'))
 driver = GraphDatabase.driver(config.NEO4J_URI, auth=(config.NEO4J_USER, config.NEO4J_PASSWORD))
 
 def create_constraints(tx):
