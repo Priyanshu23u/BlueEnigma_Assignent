@@ -6,6 +6,8 @@ from transformers import AutoTokenizer, AutoModel
 import torch
 import requests
 import config
+from openai import OpenAI
+import os
 
 # Embedding model
 tokenizer = AutoTokenizer.from_pretrained("jinaai/jina-embeddings-v2-base-en")
@@ -82,20 +84,17 @@ def build_prompt(user_query, pinecone_matches, graph_facts):
     return prompt
 
 def call_groq_chat(prompt_messages):
-    url = "https://api.groq.com/v1/chat/completions"
-    headers = {
-        "Authorization": f"Bearer {config.GROQ_API_KEY}",
-        "Content-Type": "application/json"
-    }
-    data = {
-        "model": "llama3-70b-8192",  # or your preferred Groq model
-        "messages": prompt_messages,
-        "max_tokens": 600,
-        "temperature": 0.2
-    }
-    response = requests.post(url, headers=headers, json=data)
-    response.raise_for_status()
-    return response.json()["choices"][0]["message"]["content"]
+    client = OpenAI(
+        api_key=os.environ.get("GROQ_API_KEY"),
+        base_url="https://api.groq.com/openai/v1"
+    )
+    response = client.chat.completions.create(
+        model="llama-3.1-8b-instant",  # or your preferred supported model name
+        messages=prompt_messages,
+        max_tokens=600,
+        temperature=0.2
+    )
+    return response.choices[0].message.content
 
 def interactive_chat():
     print("Hybrid travel assistant. Type 'exit' to quit.")
