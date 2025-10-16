@@ -23,3 +23,7 @@ PINECONE_VECTOR_DIM = int(os.getenv("PINECONE_VECTOR_DIM", 768))
 PINECONE_FIELD_MAP = dict([kv.split(":") for kv in os.getenv("PINECONE_FIELD_MAP","text:chunk_text").split(",")])
 PINECONE_CLOUD = "aws"        
 PINECONE_REGION = "us-east-1"
+
+# Performance Tuning (NEW)
+SCORE_THRESHOLD = 0.7  # Minimum similarity score for Pinecone results
+CACHE_MAX_SIZE = 1000  # Maximum number of cached embeddings
