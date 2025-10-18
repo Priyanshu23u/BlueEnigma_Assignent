@@ -1,4 +1,4 @@
-# 🇻🇳 Vietnam Hybrid RAG Travel Assistant – Project Improvements
+# Vietnam Hybrid RAG Travel Assistant – Project Improvements
 
 This document summarizes key enhancements implemented in the **Hybrid RAG Travel Assistant** system, focusing on theoretical concepts, methodology, and measurable impact.
 
