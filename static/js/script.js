@@ -16,14 +16,12 @@ function showTab(tabName, event) {
         btn.classList.remove('active');
     });
     
-    // Add active class to clicked button (if event exists)
     if (event && event.target) {
         const clickedBtn = event.target.closest('.nav-btn');
         if (clickedBtn) {
             clickedBtn.classList.add('active');
         }
     } else {
-        // Default to first button if no event
         const targetBtn = Array.from(document.querySelectorAll('.nav-btn'))
             .find(btn => btn.textContent.toLowerCase().includes(tabName));
         if (targetBtn) {
@@ -42,8 +40,16 @@ function showTab(tabName, event) {
         selectedTab.classList.add('active');
     }
     
-    if (tabName === 'graph' && !network) {
-        setTimeout(initializeNeo4jViz, 100);
+    if (tabName === 'graph') {
+        // Force resize and re-render after tab is visible
+        setTimeout(() => {
+            if (network) {
+                network.redraw();
+                network.fit();
+            } else {
+                initializeNeo4jViz();
+            }
+        }, 100);
     }
 }
 
@@ -308,43 +314,95 @@ function showNodesInGraph(nodeIds) {
 }
 
 function renderCustomGraph(nodes, edges) {
+    console.log("Rendering graph with", nodes.length, "nodes and", edges.length, "edges");
+    
     const container = document.getElementById('neo4jViz');
     
-    if (!nodes || nodes.length === 0) {
-        container.innerHTML = `
-            <div style="display: flex; align-items: center; justify-content: center; height: 100%; color: #64748b;">
-                <p>No graph data available</p>
-            </div>
-        `;
+    if (!container || typeof vis === 'undefined' || !nodes || nodes.length === 0) {
         return;
     }
     
-    // Prepare data for vis-network
+    // Clear container
+    container.innerHTML = '';
+    
+    // Prepare node data with better label positioning
     const nodeData = nodes.map(node => ({
-        id: node.id,
-        label: node.label || node.id,
-        title: `${node.label || node.id}\nType: ${node.type || 'Unknown'}\nID: ${node.id}`,
-        color: getNodeColor(node.type),
+        id: String(node.id),
+        label: String(node.label || node.id),
+        title: `<strong>${node.label || node.id}</strong><br>Type: ${node.type || 'Unknown'}<br>ID: ${node.id}`,
+        color: {
+            background: getNodeColor(node.type),
+            border: '#1e293b',
+            highlight: {
+                background: getNodeColor(node.type),
+                border: '#0f172a'
+            }
+        },
         font: { 
             color: '#1e293b',
-            size: 14
+            size: 12,
+            face: 'Poppins',
+            multi: false,
+            bold: {
+                size: 14
+            }
         },
         shape: 'dot',
-        size: 25
-    }));
-    
-    const edgeData = edges.map((edge, idx) => ({
-        id: idx,
-        from: edge.from,
-        to: edge.to,
-        label: edge.label || '',
-        arrows: 'to',
-        color: '#64748b',
-        font: {
-            size: 12,
-            align: 'middle'
+        size: 30,
+        borderWidth: 2,
+        chosen: {
+            node: function(values, id, selected, hovering) {
+                if (selected || hovering) {
+                    values.size = 35;
+                    values.borderWidth = 3;
+                }
+            }
         }
     }));
+    
+    // Prepare edge data - hide labels by default to reduce clutter
+    // Prepare edge data with cleaner labels
+const edgeData = edges.map((edge, idx) => ({
+    id: idx,
+    from: String(edge.from),
+    to: String(edge.to),
+    label: edge.label || '',  // Show the relationship label
+    title: `Relationship: ${edge.label || 'Related'}`,
+    arrows: { 
+        to: { 
+            enabled: true, 
+            scaleFactor: 0.6 
+        } 
+    },
+    color: { 
+        color: '#94a3b8',
+        highlight: '#1e293b',
+        hover: '#475569'
+    },
+    width: 1.5,
+    font: {
+        size: 15,
+        color: '#64748b',
+        face: 'Poppins',
+        strokeWidth: 2,
+        strokeColor: '#ffffff',
+        align: 'middle',
+        background: 'rgba(255, 255, 255, 0.8)',
+        padding: 2
+    },
+    smooth: {
+        type: 'continuous',
+        roundness: 0.5
+    },
+    chosen: {
+        edge: function(values, id, selected, hovering) {
+            if (hovering) {
+                values.width = 3;
+            }
+        }
+    }
+}));
+
     
     const data = {
         nodes: new vis.DataSet(nodeData),
@@ -354,73 +412,138 @@ function renderCustomGraph(nodes, edges) {
     const options = {
         nodes: {
             shape: 'dot',
-            size: 25,
+            size: 30,
             font: {
-                size: 14,
-                color: '#1e293b'
+                size: 112,
+                color: '#1e293b',
+                face: 'Poppins',
+                strokeWidth: 3,
+                strokeColor: '#ffffff',
+                align: 'center'
             },
             borderWidth: 2,
-            shadow: true
+            shadow: {
+                enabled: true,
+                color: 'rgba(0,0,0,0.15)',
+                size: 8,
+                x: 2,
+                y: 2
+            }
         },
         edges: {
-            width: 2,
-            font: {
-                size: 12,
-                align: 'middle'
-            },
-            smooth: {
-                type: 'continuous'
-            },
-            shadow: true
-        },
+    width: 1.5,
+    shadow: {
+        enabled: true,
+        color: 'rgba(0,0,0,0.1)',
+        size: 50
+    },
+    font: {
+        size: 10,
+        color: '#64748b',
+        face: 'Poppins',
+        strokeWidth: 2,
+        strokeColor: '#ffffff',
+        align: 'middle',
+        background: 'rgba(255, 255, 255, 0.8)'
+    },
+    smooth: {
+        type: 'continuous',
+        roundness: 0.5
+    }
+},
+
         physics: {
             enabled: true,
             stabilization: {
+                enabled: true,
                 iterations: 150,
+                updateInterval: 25,
                 fit: true
             },
             barnesHut: {
                 gravitationalConstant: -3000,
-                springLength: 150,
-                springConstant: 0.04
-            }
+                centralGravity: 0.1,
+                springLength: 300,
+                springConstant: 0.04,
+                damping: 0.09,
+                avoidOverlap: 0.5
+            },
+            maxVelocity: 50,
+            minVelocity: 0.1,
+            solver: 'barnesHut'
         },
         interaction: {
             hover: true,
+            tooltipDelay: 100,
             zoomView: true,
             dragView: true,
-            tooltipDelay: 100
+            navigationButtons: true,
+            keyboard: {
+                enabled: true,
+                bindToWindow: false
+            },
+            multiselect: false,
+            hideEdgesOnDrag: false,
+            hideEdgesOnZoom: false
         },
         layout: {
-            improvedLayout: true
+            improvedLayout: true,
+            hierarchical: false,
+            randomSeed: 42
         }
     };
     
-    // Clear previous network
+    // Destroy previous network
     if (network) {
         network.destroy();
+        network = null;
     }
     
-    network = new vis.Network(container, data, options);
-    
-    // Add click event
-    network.on('click', function(params) {
-        if (params.nodes.length > 0) {
-            const nodeId = params.nodes[0];
-            console.log('Clicked node:', nodeId);
-        }
-    });
-    
-    // Fit view once stabilized
-    network.once('stabilizationIterationsDone', function() {
-        network.fit({
-            animation: {
-                duration: 1000,
-                easingFunction: 'easeInOutQuad'
+    try {
+        network = new vis.Network(container, data, options);
+        
+        // Event handlers
+        network.on('click', function(params) {
+            if (params.nodes.length > 0) {
+                const nodeId = params.nodes[0];
+                console.log('Clicked node:', nodeId);
             }
         });
-    });
+        
+        network.on('hoverNode', function(params) {
+            container.style.cursor = 'pointer';
+        });
+        
+        network.on('blurNode', function(params) {
+            container.style.cursor = 'default';
+        });
+        
+        network.on('stabilizationIterationsDone', function() {
+            console.log("Stabilization complete");
+            network.setOptions({ physics: { enabled: false } });
+            
+            // Fit view with padding
+            network.fit({
+                animation: {
+                    duration: 1000,
+                    easingFunction: 'easeInOutQuad'
+                },
+                padding: 50
+            });
+        });
+        
+        network.on('stabilizationProgress', function(params) {
+            const progress = Math.round((params.iterations / params.total) * 100);
+            if (progress % 20 === 0) {
+                console.log(`Stabilizing: ${progress}%`);
+            }
+        });
+        
+    } catch (error) {
+        console.error("Error creating network:", error);
+    }
 }
+
 
 function getNodeColor(type) {
     const colors = {
@@ -461,3 +584,5 @@ const messagesContainer = document.getElementById('chatMessages');
 if (messagesContainer) {
     observer.observe(messagesContainer, { childList: true });
 }
+
+// Force graph resize when tab is shown
