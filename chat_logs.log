@@ -11,3 +11,15 @@
 2025-10-18 23:55:04,924 - INFO - Fetched 5 graph facts
 2025-10-18 23:55:07,510 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
 2025-10-18 23:55:07,517 - INFO - Response generated successfully
+2025-10-19 00:08:32,403 - INFO - User query: “Enter your travel question: create a romantic 4 day itinerary for
+2025-10-19 00:08:32,544 - INFO - Generated embedding for: “Enter your travel question: create a romantic 4 d...
+2025-10-19 00:08:34,327 - INFO - Pinecone returned 5 matches, 5 above threshold
+2025-10-19 00:08:36,694 - INFO - Fetched 5 graph facts
+2025-10-19 00:08:41,079 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-19 00:08:41,136 - INFO - Response generated successfully
+2025-10-19 00:09:08,251 - INFO - User query: create a romantic 4 day itinerary for vietnam
+2025-10-19 00:09:08,289 - INFO - Generated embedding for: create a romantic 4 day itinerary for vietnam...
+2025-10-19 00:09:08,625 - INFO - Pinecone returned 5 matches, 5 above threshold
+2025-10-19 00:09:09,396 - INFO - Fetched 5 graph facts
+2025-10-19 00:09:11,798 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-19 00:09:11,805 - INFO - Response generated successfully
