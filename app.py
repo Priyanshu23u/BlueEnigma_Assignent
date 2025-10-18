@@ -203,7 +203,7 @@ def call_groq_chat(prompt_messages):
         models_to_try = [
             "llama-3.3-70b-versatile",
             "llama-3.1-8b-instant",
-            "gemma2-9b-it"
+            "meta-llama/llama-guard-4-12b"
         ]
         
         last_error = None

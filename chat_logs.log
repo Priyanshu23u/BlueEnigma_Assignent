@@ -1,0 +1,13 @@
+2025-10-18 23:34:19,282 - INFO - User query: Give a budget friendly 5 day iternery plan for vietnam trip
+2025-10-18 23:34:19,392 - INFO - Generated embedding for: Give a budget friendly 5 day iternery plan for vie...
+2025-10-18 23:34:21,048 - INFO - Pinecone returned 5 matches, 5 above threshold
+2025-10-18 23:34:23,138 - INFO - Fetched 5 graph facts
+2025-10-18 23:34:24,121 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 400 Bad Request"
+2025-10-18 23:34:24,124 - ERROR - Groq API error: Error code: 400 - {'error': {'message': 'The model `llama3-70b-8192` has been decommissioned and is no longer supported. Please refer to https://console.groq.com/docs/deprecations for a recommendation on which model to use instead.', 'type': 'invalid_request_error', 'code': 'model_decommissioned'}}
+2025-10-18 23:34:24,125 - INFO - Response generated successfully
+2025-10-18 23:55:00,976 - INFO - User query: Give a budget friendly 5 day iternery plan for vietnam trip for indian traveller
+2025-10-18 23:55:01,146 - INFO - Generated embedding for: Give a budget friendly 5 day iternery plan for vie...
+2025-10-18 23:55:02,905 - INFO - Pinecone returned 5 matches, 5 above threshold
+2025-10-18 23:55:04,924 - INFO - Fetched 5 graph facts
+2025-10-18 23:55:07,510 - INFO - HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2025-10-18 23:55:07,517 - INFO - Response generated successfully

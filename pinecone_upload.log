@@ -13,3 +13,64 @@
  'total_vector_count': 360,
  'vector_type': 'dense'}
 2025-10-18 19:15:45,434 - INFO - Upload process completed
+2025-10-18 23:20:44,269 - INFO - Loading embedding model...
+2025-10-18 23:20:56,162 - INFO - Embedding model loaded successfully
+2025-10-18 23:20:56,171 - INFO - Initializing Pinecone...
+2025-10-18 23:20:58,073 - INFO - Existing indexes: ['vietnam-travel']
+2025-10-18 23:20:58,073 - INFO - Using existing index: vietnam-travel
+2025-10-18 23:20:59,632 - INFO - Loading data from: C:\Users\Priyanshu Upadhyay\Documents\Python Scripts\genAi\project\EnigmaProject\vietnam-travel-hybrid-ai\data\vietnam_travel_dataset.json
+2025-10-18 23:20:59,634 - INFO - Loaded 360 nodes from dataset
+2025-10-18 23:20:59,635 - INFO - Prepared 360 items for upload (skipped 0 invalid items)
+2025-10-18 23:21:45,311 - INFO - Index statistics: {'dimension': 768,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {'': {'vector_count': 360}},
+ 'total_vector_count': 360,
+ 'vector_type': 'dense'}
+2025-10-18 23:21:45,312 - INFO - Upload process completed
+2025-10-18 23:22:30,581 - INFO - Loading embedding model...
+2025-10-18 23:22:36,208 - INFO - Embedding model loaded successfully
+2025-10-18 23:22:36,220 - INFO - Initializing Pinecone...
+2025-10-18 23:22:38,046 - INFO - Existing indexes: ['vietnam-travel']
+2025-10-18 23:22:38,046 - INFO - Using existing index: vietnam-travel
+2025-10-18 23:22:38,807 - INFO - Loading data from: C:\Users\Priyanshu Upadhyay\Documents\Python Scripts\genAi\project\EnigmaProject\vietnam-travel-hybrid-ai\data\vietnam_travel_dataset.json
+2025-10-18 23:22:38,818 - INFO - Loaded 360 nodes from dataset
+2025-10-18 23:22:38,818 - INFO - Prepared 360 items for upload (skipped 0 invalid items)
+2025-10-18 23:23:24,313 - INFO - Loading embedding model...
+2025-10-18 23:23:31,662 - INFO - Index statistics: {'dimension': 768,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {'': {'vector_count': 360}},
+ 'total_vector_count': 360,
+ 'vector_type': 'dense'}
+2025-10-18 23:23:31,663 - INFO - Upload process completed
+2025-10-18 23:25:17,458 - INFO - Embedding model loaded successfully
+2025-10-18 23:25:17,545 - INFO - Initializing Pinecone...
+2025-10-18 23:25:20,456 - INFO - Existing indexes: ['vietnam-travel']
+2025-10-18 23:25:20,456 - INFO - Using existing index: vietnam-travel
+2025-10-18 23:25:22,301 - INFO - Loading data from: C:\Users\Priyanshu Upadhyay\Documents\Python Scripts\genAi\project\EnigmaProject\vietnam-travel-hybrid-ai\data\vietnam_travel_dataset.json
+2025-10-18 23:25:22,307 - INFO - Loaded 360 nodes from dataset
+2025-10-18 23:25:22,308 - INFO - Prepared 360 items for upload (skipped 0 invalid items)
+2025-10-18 23:26:12,309 - INFO - Index statistics: {'dimension': 768,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {'': {'vector_count': 360}},
+ 'total_vector_count': 360,
+ 'vector_type': 'dense'}
+2025-10-18 23:26:12,310 - INFO - Upload process completed
+2025-10-18 23:38:50,029 - INFO - Loading embedding model...
+2025-10-18 23:38:54,929 - INFO - Embedding model loaded successfully
+2025-10-18 23:38:54,929 - INFO - Initializing Pinecone...
+2025-10-18 23:38:56,902 - INFO - Existing indexes: []
+2025-10-18 23:38:56,903 - INFO - Creating new index: vietnam-travel
+2025-10-18 23:39:00,230 - INFO - Index created successfully
+2025-10-18 23:39:05,324 - INFO - Loading data from: C:\Users\Priyanshu Upadhyay\Documents\Python Scripts\genAi\project\EnigmaProject\vietnam-travel-hybrid-ai\data\vietnam_travel_dataset.json
+2025-10-18 23:39:05,327 - INFO - Loaded 360 nodes from dataset
+2025-10-18 23:39:05,328 - INFO - Prepared 360 items for upload (skipped 0 invalid items)
+2025-10-18 23:40:21,867 - INFO - Index statistics: {'dimension': 768,
+ 'index_fullness': 0.0,
+ 'metric': 'cosine',
+ 'namespaces': {'': {'vector_count': 360}},
+ 'total_vector_count': 360,
+ 'vector_type': 'dense'}
+2025-10-18 23:40:21,868 - INFO - Upload process completed
