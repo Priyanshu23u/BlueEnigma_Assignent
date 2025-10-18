@@ -27,30 +27,30 @@ Before starting, ensure you have:
 ## 📊 Project Structure
 ```bash
 BlueEnigma_Assignment/
-├── app.py # Flask web app (bonus)
-├── config.py # Configuration
-├── requirements.txt # Dependencies
-├── .env # API keys (don't commit!)
-├── README.md # This file
+├── app.py 
+├── config.py 
+├── requirements.txt 
+├── .env 
+├── README.md 
 │
 ├── data/
 │ └── vietnam_travel_dataset.json
 │
 ├── scripts/
-│ ├── hybrid_chat.py # Main chat script
-│ ├── load_to_neo4j.py # Neo4j loader
-│ ├── pinecone_upload.py # Pinecone uploader
-│ └── visualize_graph.py # Graph visualization
+│ ├── hybrid_chat.py 
+│ ├── load_to_neo4j.py 
+│ ├── pinecone_upload.py 
+│ └── visualize_graph.py 
 │
-├── templates/ # Web UI (bonus)
+├── templates/ 
 │ └── index.html
 │
-├── static/ # CSS/JS (bonus)
+├── static/ 
 │ ├── css/style.css
 │ └── js/script.js
 │
 └── improvements/
-└── improvements.md # Your documentation
+└── improvements.md 
 ```
 
 
@@ -77,7 +77,8 @@ pip install -r requirements.txt
 
 ### Step 2: Configure API Keys
 
-Create a `.env` file in the project root and add your credentials:
+Create a `.env` file in the project root and add your credentials:-
+```bash
 Neo4j AuraDB
 NEO4J_URI=neo4j+s://your-instance.databases.neo4j.io
 NEO4J_USER=neo4j
@@ -91,34 +92,40 @@ Pinecone
 PINECONE_API_KEY=your_pinecone_api_key
 PINECONE_INDEX_NAME=vietnam-travel
 PINECONE_VECTOR_DIM=768
-
+```
 
 ### Step 3: Load Data to Neo4j
+```bash
 python scripts/load_to_neo4j.py
-
+```
 
 ### Step 4: Visualize the Graph (Optional)
+```bash
 python scripts/visualize_graph.py
-
+```
 This generates `neo4j_viz.html` which you can open in your browser to explore the knowledge graph structure.
 
 ### Step 5: Upload Embeddings to Pinecone
+```bash
 python scripts/pinecone_upload.py
-
+```
 
 ### Step 6: Run the Hybrid Chat
+```bash
 python scripts/hybrid_chat.py
-
+```
 
 ### Step 7: Test with Sample Query
-Type the following query:
-
+```bash
+Type the  query:
+```
 
 ## 🌐 Web Interface (Bonus)
 
 For a modern web interface with interactive graph visualization:
+```bash
 python app.py
-
+```
 
 Then open `http://localhost:5000` in your browser.
 

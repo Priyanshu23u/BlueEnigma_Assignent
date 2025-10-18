@@ -1,0 +1,25 @@
+# Core Dependencies
+flask==3.0.0
+flask-cors==4.0.0
+python-dotenv==1.0.0
+
+# Database & Vector Store
+pinecone-client==3.0.3
+neo4j==5.14.1
+
+# Machine Learning & Embeddings
+transformers==4.36.2
+torch==2.1.2
+sentence-transformers==2.2.2
+
+# LLM Integration
+openai==1.6.1
+
+# Data Processing
+numpy==1.24.3
+pandas==2.1.4
+
+# Utilities
+tqdm==4.66.1
+requests==2.31.0
+
