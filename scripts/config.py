@@ -8,7 +8,7 @@ load_dotenv()
 NEO4J_URI = os.getenv("NEO4J_URI")
 NEO4J_USER = os.getenv("NEO4J_USER")
 NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
-NEO4J_DATABASE = os.getenv("NEO4J_DATABASE")
+NEO4J_DATABASE = os.getenv("NEO4J_DATABASE", "neo4j")
 AURA_INSTANCEID = os.getenv("AURA_INSTANCEID")
 AURA_INSTANCENAME = os.getenv("AURA_INSTANCENAME")
 
@@ -18,12 +18,11 @@ GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 # Pinecone
 PINECONE_API_KEY = os.getenv("PINECONE_API_KEY")
 PINECONE_ENV = os.getenv("PINECONE_ENV")
-PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME")
-PINECONE_VECTOR_DIM = int(os.getenv("PINECONE_VECTOR_DIM", 768))
-PINECONE_FIELD_MAP = dict([kv.split(":") for kv in os.getenv("PINECONE_FIELD_MAP","text:chunk_text").split(",")])
+PINECONE_INDEX_NAME = os.getenv("PINECONE_INDEX_NAME", "vietnam-travel")
+PINECONE_VECTOR_DIM = int(os.getenv("PINECONE_VECTOR_DIM", "768"))
 PINECONE_CLOUD = "aws"        
 PINECONE_REGION = "us-east-1"
 
-# Performance Tuning (NEW)
-SCORE_THRESHOLD = 0.7  # Minimum similarity score for Pinecone results
-CACHE_MAX_SIZE = 1000  # Maximum number of cached embeddings
+# Performance Tuning
+SCORE_THRESHOLD = 0.7
+CACHE_MAX_SIZE = 1000

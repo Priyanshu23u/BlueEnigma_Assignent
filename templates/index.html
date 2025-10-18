@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vietnam Travel Assistant - AI-Powered Travel Guide</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/vis-network@9.1.2/dist/vis-network.min.js"></script>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-globe-asia"></i>
+                <h1>Vietnam Travel Assistant</h1>
+            </div>
+            <nav>
+                <button class="nav-btn active" onclick="showTab('chat', event)">
+                    <i class="fas fa-comments"></i> Chat
+                </button>
+                <button class="nav-btn" onclick="showTab('graph', event)">
+                    <i class="fas fa-project-diagram"></i> Knowledge Graph
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Chat Tab -->
+            <div id="chat-tab" class="tab-content active">
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h2><i class="fas fa-robot"></i> AI Travel Assistant</h2>
+                        <p>Ask me anything about traveling in Vietnam!</p>
+                    </div>
+                    
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message bot-message">
+                            <div class="message-avatar">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <div class="message-content">
+                                <p>Hello! 👋 I'm your Vietnam Travel Assistant. I can help you plan your perfect trip to Vietnam using AI-powered recommendations and our extensive knowledge graph.</p>
+                                <p><strong>Try asking me:</strong></p>
+                                <ul>
+                                    <li>"Create a 4-day itinerary for Hanoi"</li>
+                                    <li>"What are the best beaches in Vietnam?"</li>
+                                    <li>"Recommend romantic hotels in Da Nang"</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="chat-input-container">
+                        <div class="input-wrapper">
+                            <input type="text" id="chatInput" placeholder="Ask me about Vietnam travel..." 
+                                   onkeypress="handleKeyPress(event)">
+                            <button onclick="sendMessage()" id="sendBtn">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="quick-actions">
+                            <button class="quick-btn" onclick="quickQuery('Best places to visit in Vietnam')">
+                                <i class="fas fa-map-marked-alt"></i> Best Places
+                            </button>
+                            <button class="quick-btn" onclick="quickQuery('Traditional Vietnamese food recommendations')">
+                                <i class="fas fa-utensils"></i> Food Guide
+                            </button>
+                            <button class="quick-btn" onclick="quickQuery('7-day Vietnam itinerary')">
+                                <i class="fas fa-calendar-alt"></i> Sample Itinerary
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Sidebar with context -->
+                <div class="sidebar">
+                    <div class="context-card">
+                        <h3><i class="fas fa-info-circle"></i> About</h3>
+                        <p>This AI assistant uses:</p>
+                        <ul>
+                            <li><strong>Vector Search:</strong> Semantic similarity with Pinecone</li>
+                            <li><strong>Knowledge Graph:</strong> Relationship data from Neo4j</li>
+                            <li><strong>LLM:</strong> Powered by Groq (Llama 3)</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="stats-card">
+                        <h3><i class="fas fa-chart-bar"></i> System Stats</h3>
+                        <div class="stat-item">
+                            <span class="stat-label">Nodes:</span>
+                            <span class="stat-value" id="nodeCount">360</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Relationships:</span>
+                            <span class="stat-value" id="relCount">370</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">Vector Dim:</span>
+                            <span class="stat-value">768</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Graph Tab -->
+            <div id="graph-tab" class="tab-content">
+                <div class="graph-container">
+                    <div class="graph-header">
+                        <h2><i class="fas fa-project-diagram"></i> Vietnam Travel Knowledge Graph</h2>
+                        <div class="graph-controls">
+                            <input type="text" id="nodeSearchInput" placeholder="Search node ID..." 
+                                   onkeypress="handleGraphSearch(event)">
+                            <button onclick="searchNode()" class="control-btn">
+                                <i class="fas fa-search"></i> Search
+                            </button>
+                            <button onclick="resetGraph()" class="control-btn">
+                                <i class="fas fa-sync"></i> Reset
+                            </button>
+                        </div>
+                    </div>
+                    <div id="neo4jViz" class="neo4j-visualization"></div>
+                    <div class="graph-info">
+                        <p><i class="fas fa-lightbulb"></i> Click nodes to explore relationships. Use mouse wheel to zoom. Enter a node ID in search to focus.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2025 Vietnam Travel Assistant | Powered by Neo4j, Pinecone & Groq</p>
+    </footer>
+
+    <!-- Loading overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Thinking...</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
